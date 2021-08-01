@@ -1,0 +1,16 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
+Metrics/BlockLength:
+  Exclude: 
+    - spec/*
+
+Metrics/MethodLength:
+  Max: 15
+
+Naming/PredicateName:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
