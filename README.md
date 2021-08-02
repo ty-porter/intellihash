@@ -56,7 +56,7 @@ Creating an Intellihash is approximately 5x faster than instantiating an OpenStr
 ```              
                   user     system      total        real                
 OpenStruct:   4.046875   0.906250   4.953125 (  4.979611)
-Intellihash:    0.828125   0.125000   0.953125 (  0.956110)
+Intellihash:  0.828125   0.125000   0.953125 (  0.956110)
 ```
 
 See [Testing Performance](#testing-performance) for details on running benchmarks.
