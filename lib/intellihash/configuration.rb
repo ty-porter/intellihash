@@ -25,13 +25,13 @@ module Intellihash
   end
 
   class Configuration
-    attr_accessor :enabled, :smart_by_default
+    attr_accessor :enabled, :intelligent_by_default
     attr_reader   :default_format
 
     def initialize
-      @default_format    = :symbol
-      @enabled           = false
-      @smart_by_default  = false
+      @default_format          = :symbol
+      @enabled                 = false
+      @intelligent_by_default  = false
     end
 
     def default_format=(other)

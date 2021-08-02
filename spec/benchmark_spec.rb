@@ -12,9 +12,9 @@ RSpec.describe 'benchmarks' do
 
   before do
     Intellihash.configure do |config|
-      config.enabled          = true
-      config.smart_by_default = true
-      config.default_format   = :string
+      config.enabled                = true
+      config.intelligent_by_default = true
+      config.default_format         = :string
     end
   end
 
@@ -28,8 +28,8 @@ RSpec.describe 'benchmarks' do
         200.times { JSON.parse(raw_fixture).to_intellihash }
       end
 
-      puts "OpenStruct: #{ostruct_benchmark}"
-      puts "Intellihash:  #{shash_benchmark}"
+      puts "OpenStruct:  #{ostruct_benchmark}"
+      puts "Intellihash: #{shash_benchmark}"
 
       expect(ostruct_benchmark.real > shash_benchmark.real).to eq(true)
     end

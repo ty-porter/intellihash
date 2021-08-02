@@ -49,14 +49,14 @@ RSpec.describe Intellihash::Configuration do
       end
     end
 
-    context 'smart_by_default' do
+    context 'intelligent_by_default' do
       it 'should be disabled' do
-        expect(Intellihash.configuration.smart_by_default).to eq(false)
+        expect(Intellihash.configuration.intelligent_by_default).to eq(false)
       end
 
       it 'can be enabled' do
-        Intellihash.configure { |c| c.smart_by_default = true }
-        expect(Intellihash.configuration.smart_by_default).to eq(true)
+        Intellihash.configure { |c| c.intelligent_by_default = true }
+        expect(Intellihash.configuration.intelligent_by_default).to eq(true)
       end
     end
   end

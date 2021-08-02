@@ -2,22 +2,22 @@
 
 module Intellihash
   module Mixins
-    def smart
-      @smart = @smart.nil? ? Intellihash.configuration.smart_by_default : @smart
+    def intelligent
+      @intelligent = @intelligent.nil? ? Intellihash.configuration.intelligent_by_default : @intelligent
     end
 
-    def is_smart=(value)
+    def is_intelligent=(value)
       # Ensure this is a boolean
-      @smart = value == true
+      @intelligent = value == true
     end
 
     def to_intellihash
-      @smart = true
+      @intelligent = true
       self
     end
 
-    def is_smart?
-      smart
+    def is_intelligent?
+      intelligent
     end
 
     def default_format
@@ -39,7 +39,7 @@ module Intellihash
     }.freeze
 
     def method_missing(method_name, *args, **kwargs, &block)
-      super unless respond_to?(:is_smart?) && is_smart?
+      super unless respond_to?(:is_intelligent?) && is_intelligent?
 
       if method_name[-1] == '='
         send(:store, method_name[0, method_name.size - 1].send(key_store_as), args.first)
@@ -53,7 +53,7 @@ module Intellihash
     end
 
     def respond_to_missing?(*)
-      is_smart? ? true : super
+      is_intelligent? ? true : super
     end
 
     def key_store_as

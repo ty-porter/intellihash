@@ -6,8 +6,8 @@ require 'intellihash'
 require 'byebug'
 
 Intellihash.configure do |config|
-  config.enabled          = true
-  config.smart_by_default = true
+  config.enabled                = true
+  config.intelligent_by_default = true
 end
 
 require 'irb'

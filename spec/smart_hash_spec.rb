@@ -24,8 +24,8 @@ RSpec.describe Intellihash do
   let(:flat_hash) { { foo: :bar } }
   let(:nested_hash) { { foo: { bar: :baz } } }
 
-  context 'when is a smart hash' do
-    before { allow_any_instance_of(Hash).to receive(:is_smart?).and_return true }
+  context 'when is a intelligent hash' do
+    before { allow_any_instance_of(Hash).to receive(:is_intelligent?).and_return true }
 
     context 'attr_readers' do
       it 'returns nil if key is not in hash' do
@@ -186,7 +186,7 @@ RSpec.describe Intellihash do
     end
   end
 
-  context 'when is not smart' do
+  context 'when is not intelligent' do
     context 'attr_readers' do
       it 'raise NoMethodError' do
         expect { empty_hash.foo }.to raise_error NoMethodError
@@ -200,7 +200,7 @@ RSpec.describe Intellihash do
     end
   end
 
-  context 'smart inheritance' do
+  context 'intelligent inheritance' do
     let(:hash) { { foo: :bar } }
 
     context '#compact' do
@@ -213,14 +213,14 @@ RSpec.describe Intellihash do
       let(:hash2) { hash.compact }
       let(:expected) { { foo: :bar } }
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
 
     context '#invert' do
       let(:hash2) { hash.invert }
       let(:expected) { { bar: :foo } }
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
 
     context '#merge' do
@@ -232,49 +232,49 @@ RSpec.describe Intellihash do
         }
       end
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
 
     context '#reject' do
       let(:hash2) { hash.reject { |_k, _v| true } }
       let(:expected) { {} }
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
 
     context '#select' do
       let(:hash2) { hash.select { |_k, _v| true } }
       let(:expected) { hash }
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
 
     context '#slice' do
       let(:hash2) { hash.slice(:foo) }
       let(:expected) { hash }
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
 
     context '#to_h' do
       let(:hash2) { hash.to_h }
       let(:expected) { hash }
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
 
     context '#transform_keys' do
       let(:hash2) { hash.transform_keys(&:to_s) }
       let(:expected) { { 'foo' => :bar } }
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
 
     context '#transform_values' do
       let(:hash2) { hash.transform_values(&:to_s) }
       let(:expected) { { foo: 'bar' } }
 
-      include_examples 'smart hash attribute'
+      include_examples 'intelligent hash attribute'
     end
   end
 
@@ -282,12 +282,12 @@ RSpec.describe Intellihash do
     let(:hash) { { foo: :bar } }
 
     before do
-      hash.is_smart = true
+      hash.is_intelligent = true
       hash.merge!(baz: :bat)
     end
 
-    it 'does not alter smart attribute' do
-      expect(hash.is_smart?).to eq(true)
+    it 'does not alter intelligent attribute' do
+      expect(hash.is_intelligent?).to eq(true)
       expect(hash).to eq({
                            foo: :bar,
                            baz: :bat
@@ -299,10 +299,10 @@ RSpec.describe Intellihash do
     let(:hash)  { { foo: :bar } }
     let(:hash2) { { foo: :bar } }
 
-    it 'is equal even if the smart attribute differs' do
+    it 'is equal even if the intelligent attribute differs' do
       expect(hash2 == hash).to eq(true)
 
-      hash2.is_smart = true
+      hash2.is_intelligent = true
 
       expect(hash2 == hash).to eq(true)
     end

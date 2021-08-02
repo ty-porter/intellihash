@@ -4,7 +4,7 @@ module Intellihash
   module Callbacks
     # https://ruby-doc.org/core-3.0.1/Hash.html
     #
-    # Methods that return a copy of :self: need this callback to populate :smart: from :self:
+    # Methods that return a copy of :self: need this callback to populate :intelligent: from :self:
     AFTER_CALLBACK_TARGETS = %i[
       compact
       invert
@@ -24,7 +24,7 @@ module Intellihash
         result = super(*args, &block)
 
         # Register :after: callbacks
-        result.is_smart = smart if result.respond_to?(:is_smart=) && !result.frozen?
+        result.is_intelligent = intelligent if result.respond_to?(:is_intelligent=) && !result.frozen?
 
         result
       end

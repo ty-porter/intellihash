@@ -2,7 +2,7 @@
 
 A fast implementation of hashes as objects, benchmarked against OpenStruct. It allows chaining hash attributes as method calls instead of standard hash syntax.
 
-Since an Intellihash extends the native Ruby `Hash`, this means instantiating a new smart hash is just as fast as a normal hash, _and_ you retain the ability to call all the normal instance methods on it.
+Since an Intellihash extends the native Ruby `Hash`, this means instantiating a new intelligent hash is just as fast as a normal hash, _and_ you retain the ability to call all the normal instance methods on it.
 
 ```ruby
 intellihash = {
@@ -85,7 +85,7 @@ If you need to customize Intellihash, you may create a configuration:
 Intellihash.configure do |config|
     config.enabled          = true     # (Boolean) Default: false 
     config.default_format   = :symbol  # (Symbol)  Default: :symbol
-    config.smart_by_default = false    # (Boolean) Default: false
+    config.intelligent_by_default = false    # (Boolean) Default: false
 end
 ```
 
@@ -99,9 +99,9 @@ end
 - **default_format**
   - Valid values: `:sym, :symbol, :str, :string, :any`
   - This determines the default storage and retrieval options
-- **smart_by_default**
-  - Whether newly created hashes are smart
-  - When `false`, new hashes can still be converted to smart hashes via `hash.is_smart = true` or `hash.to_intellihash!`
+- **intelligent_by_default**
+  - Whether newly created hashes are intelligent
+  - When `false`, new hashes can still be converted to intelligent hashes via `hash.is_intelligent = true` or `hash.to_intellihash!`
 
 ### Rails
 
@@ -111,21 +111,21 @@ Place the above configuration in an initializer (such as `config/initializers/in
 
 ### Instantiating an Intellihash
 
-If you've configured Intellihash `smart_by_default = true`, you need to do nothing else as _all_ new hashes are Intellihashes.
+If you've configured Intellihash `intelligent_by_default = true`, you need to do nothing else as _all_ new hashes are Intellihashes.
 
 However, if you prefer not to use this configuration, you can create an Intellihash from any existing hash:
 
 ```ruby
 hash = { foo: :bar }
 
-hash.is_smart?
+hash.is_intelligent?
 #=> false
 
-hash.is_smart = true
+hash.is_intelligent = true
 # or
 hash.to_intellihash!
 
-hash.is_smart? 
+hash.is_intelligent? 
 #=> true
 ```
 
@@ -155,7 +155,7 @@ When configured correctly, they work even when the object contains arrays and ot
 ```ruby
 Intellihash.configure do |config|
     config.enabled          = true
-    config.smart_by_default = true
+    config.intelligent_by_default = true
     config.default_format   = :any
 end
 
