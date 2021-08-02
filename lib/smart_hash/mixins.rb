@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module SmartHash
-  module Extensions
+  module Mixins
     def smart
-      @smart ||= false
+      @smart = @smart.nil? ? SmartHash.configuration.smart_by_default : @smart
     end
 
     def is_smart=(value)
@@ -13,6 +13,7 @@ module SmartHash
 
     def to_smart_hash
       @smart = true
+      self
     end
 
     def is_smart?
@@ -20,7 +21,7 @@ module SmartHash
     end
 
     def default_format
-      @default_format ||= :symbol
+      @default_format ||= SmartHash.configuration.default_format
     end
 
     def default_format=(other)
@@ -38,11 +39,10 @@ module SmartHash
     }.freeze
 
     def method_missing(method_name, *args, **kwargs, &block)
-      super unless is_smart?
+      super unless respond_to?(:is_smart?) && is_smart?
 
       if method_name[-1] == '='
-        format_method = key_store_as(kwargs)
-        send(:store, method_name[0, method_name.size - 1].send(format_method), args.first)
+        send(:store, method_name[0, method_name.size - 1].send(key_store_as), args.first)
       else
         format_method = key_retrieve_from(kwargs)
         case format_method
@@ -52,11 +52,11 @@ module SmartHash
       end
     end
 
-    def respond_to_missing?(_method_name)
-      true
+    def respond_to_missing?(*)
+      is_smart? ? true : super
     end
 
-    def key_store_as(_kwargs)
+    def key_store_as
       default_format == :any ? FORMATTER[:symbol] : FORMATTER[default_format]
     end
 

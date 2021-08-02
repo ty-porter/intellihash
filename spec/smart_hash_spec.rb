@@ -3,13 +3,20 @@
 require_relative 'shared'
 
 RSpec.describe SmartHash do
+  before do
+    SmartHash.configure do |config|
+      config.enabled = true
+    end
+  end
+
   it 'has a version number' do
     expect(SmartHash::VERSION).not_to be nil
   end
 
   context 'extends Hash class' do
     it 'is included in Hash' do
-      expect(Hash.included_modules).to include(SmartHash::Extensions)
+      expect(Hash.included_modules).to include(SmartHash::Mixins)
+      expect(Hash.included_modules).to include(SmartHash::Callbacks)
     end
   end
 
