@@ -23,14 +23,14 @@ RSpec.shared_examples 'smart hash attribute' do
 
   context 'with overridden configuration' do
     before do
-      SmartHash.configure do |config|
+      Intellihash.configure do |config|
         config.enabled          = true
         config.smart_by_default = true
       end
     end
 
     after do
-      SmartHash.configure do |config|
+      Intellihash.configure do |config|
         config.enabled          = true
         config.smart_by_default = false
       end

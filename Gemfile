@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in smart_hash.gemspec
+# Specify your gem's dependencies in intellihash.gemspec
 gemspec
 
 gem 'rake', '~> 12.0'

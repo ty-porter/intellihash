@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module SmartHash
+module Intellihash
   module Mixins
     def smart
-      @smart = @smart.nil? ? SmartHash.configuration.smart_by_default : @smart
+      @smart = @smart.nil? ? Intellihash.configuration.smart_by_default : @smart
     end
 
     def is_smart=(value)
@@ -11,7 +11,7 @@ module SmartHash
       @smart = value == true
     end
 
-    def to_smart_hash
+    def to_intellihash
       @smart = true
       self
     end
@@ -21,7 +21,7 @@ module SmartHash
     end
 
     def default_format
-      @default_format ||= SmartHash.configuration.default_format
+      @default_format ||= Intellihash.configuration.default_format
     end
 
     def default_format=(other)

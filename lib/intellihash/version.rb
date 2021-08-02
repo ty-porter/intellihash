@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module SmartHash
+module Intellihash
   VERSION = '0.1.0'
 end

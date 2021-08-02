@@ -2,10 +2,10 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'smart_hash'
+require 'intellihash'
 require 'byebug'
 
-SmartHash.configure do |config|
+Intellihash.configure do |config|
   config.enabled          = true
   config.smart_by_default = true
 end

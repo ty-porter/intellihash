@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-module SmartHash
+module Intellihash
   class << self
     attr_reader :configuration
 
     def configure
       yield(@configuration)
 
-      inject_dependencies! if SmartHash.enabled?
+      inject_dependencies! if Intellihash.enabled?
     end
 
     def configuration=(config)
-      raise InvalidConfiguration, config.class unless config.is_a?(SmartHash::Configuration)
+      raise InvalidConfiguration, config.class unless config.is_a?(Intellihash::Configuration)
 
       @configuration = config
     end
@@ -19,8 +19,8 @@ module SmartHash
     private
 
     def inject_dependencies!
-      Hash.include SmartHash::Mixins
-      Hash.prepend SmartHash::Callbacks
+      Hash.include Intellihash::Mixins
+      Hash.prepend Intellihash::Callbacks
     end
   end
 
@@ -35,11 +35,11 @@ module SmartHash
     end
 
     def default_format=(other)
-      @default_format = SmartHash::Mixins::FORMATTER.member?(other) ? other : :symbol
+      @default_format = Intellihash::Mixins::FORMATTER.member?(other) ? other : :symbol
     end
   end
 
   class InvalidConfiguration < StandardError; end
 
-  @configuration = SmartHash::Configuration.new
+  @configuration = Intellihash::Configuration.new
 end

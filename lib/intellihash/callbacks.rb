@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SmartHash
+module Intellihash
   module Callbacks
     # https://ruby-doc.org/core-3.0.1/Hash.html
     #
@@ -17,7 +17,7 @@ module SmartHash
       transform_values
     ].freeze
 
-    # Callback registration happens as soon as SmartHash::Callbacks is prepended
+    # Callback registration happens as soon as Intellihash::Callbacks is prepended
     AFTER_CALLBACK_TARGETS.each do |instance_method|
       define_method(instance_method) do |*args, &block|
         # Call original method

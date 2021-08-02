@@ -1,26 +1,25 @@
 # frozen_string_literal: true
 
-require_relative 'lib/smart_hash/version'
+require_relative 'lib/intellihash/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'smart_hash'
-  spec.version       = SmartHash::VERSION
+  spec.name          = 'intellihash'
+  spec.version       = Intellihash::VERSION
   spec.authors       = ['Tyler Porter']
   spec.email         = ['tyler.b.porter@gmail.com']
 
   spec.summary       = 'A fast implementation of hashes as objects'
   spec.description   = <<~DESC
-        A fast implementation of hashes as objects, benchmarked against OpenStruct.
-    #{'    '}
-        It allows chaining hash attributes as method calls instead of standard hash syntax.
+    A fast implementation of hashes as objects, benchmarked against OpenStruct.
+    It allows chaining hash attributes as method calls instead of standard hash syntax.
   DESC
-  spec.homepage      = 'https://github.com/ty-porter/smart_hash'
+  spec.homepage      = 'https://github.com/ty-porter/intellihash'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.6.5')
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/ty-porter/smart_hash'
+  spec.metadata['source_code_uri'] = 'https://github.com/ty-porter/intellihash'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
