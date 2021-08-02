@@ -83,8 +83,8 @@ If you need to customize Intellihash, you may create a configuration:
 
 ```ruby
 Intellihash.configure do |config|
-    config.enabled          = true     # (Boolean) Default: false 
-    config.default_format   = :symbol  # (Symbol)  Default: :symbol
+    config.enabled                = true     # (Boolean) Default: false 
+    config.default_format         = :symbol  # (Symbol)  Default: :symbol
     config.intelligent_by_default = false    # (Boolean) Default: false
 end
 ```
@@ -154,9 +154,9 @@ When configured correctly, they work even when the object contains arrays and ot
 
 ```ruby
 Intellihash.configure do |config|
-    config.enabled          = true
+    config.enabled                = true
     config.intelligent_by_default = true
-    config.default_format   = :any
+    config.default_format         = :any
 end
 
 intellihash = {

@@ -8,6 +8,7 @@ require 'byebug'
 Intellihash.configure do |config|
   config.enabled                = true
   config.intelligent_by_default = true
+  config.default_format         = :symbol
 end
 
 require 'irb'

@@ -9,6 +9,8 @@ RSpec.describe Intellihash do
     end
   end
 
+  after { Intellihash.configuration = Intellihash::Configuration.new }
+
   it 'has a version number' do
     expect(Intellihash::VERSION).not_to be nil
   end
@@ -305,6 +307,63 @@ RSpec.describe Intellihash do
       hash2.is_intelligent = true
 
       expect(hash2 == hash).to eq(true)
+    end
+  end
+
+  context 'frozen' do
+    # rubocop:disable Lint/ConstantDefinitionInBlock
+    ATTR_WRITER_METHODS = Intellihash::Mixins.instance_methods.select { |name| name[-1] == '=' } << :to_intellihash
+    ATTR_READER_METHODS = Intellihash::Mixins.instance_methods - ATTR_WRITER_METHODS
+    # rubocop:enable Lint/ConstantDefinitionInBlock
+
+    let(:hash) { { foo: :bar }.freeze }
+
+    context 'attr_readers' do
+      ATTR_READER_METHODS.each do |name|
+        context "##{name}" do
+          it 'does not raise error' do
+            expect { hash.send(name) }.not_to raise_error
+          end
+        end
+      end
+
+      context 'values' do
+        context '#intelligent' do
+          it 'is never nil' do
+            expect(hash.intelligent).not_to be_nil
+          end
+
+          it 'returns configured value' do
+            expect(hash.intelligent).to eq(Intellihash.configuration.intelligent_by_default)
+          end
+        end
+
+        context '#default_format' do
+          it 'is never nil' do
+            expect(hash.default_format).not_to be_nil
+          end
+
+          it 'returns configured value' do
+            expect(hash.default_format).to eq(Intellihash.configuration.default_format)
+          end
+        end
+      end
+    end
+
+    context 'attr_writers' do
+      let!(:hash_copy) { hash.dup }
+
+      ATTR_WRITER_METHODS.each do |name|
+        context "##{name}" do
+          it 'raises error' do
+            if name[-1] == '='
+              expect { hash.send(name, false) }.to raise_error FrozenError
+            else
+              expect { hash.send(name) }.to raise_error FrozenError
+            end
+          end
+        end
+      end
     end
   end
 end

@@ -3,6 +3,8 @@
 module Intellihash
   module Mixins
     def intelligent
+      return @intelligent if frozen?
+
       @intelligent = @intelligent.nil? ? Intellihash.configuration.intelligent_by_default : @intelligent
     end
 
@@ -21,11 +23,21 @@ module Intellihash
     end
 
     def default_format
+      return @default_format if frozen?
+
       @default_format ||= Intellihash.configuration.default_format
     end
 
     def default_format=(other)
       @default_format = FORMATTER.member?(other) ? other : FORMATTER[:symbol]
+    end
+
+    def freeze
+      # Touch these attributes if it hasn't already happened, ensure they're not nil
+      intelligent
+      default_format
+
+      super
     end
 
     private
