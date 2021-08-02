@@ -58,6 +58,7 @@ module SmartHash
 
     def key_store_as
       default_format == :any ? FORMATTER[:symbol] : FORMATTER[default_format]
+      default_format || FORMATTER[:symbol]
     end
 
     def key_retrieve_from(options)
